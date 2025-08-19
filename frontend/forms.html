@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>INTERCLASSES - SENAI | Inscrição</title>
+  <title>Formulário de Inscrição</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon-senai.png" type="image/x-icon" />
   <style>
     :root{
       --bg:#0a0d12;           /* preto profundo/azul muito escuro */
@@ -137,6 +138,26 @@
     .toast.show{display:block}
 
     .helper{font-size:12px; color:#9fb1cf; margin-top:6px}
+    .back-arrow {
+        position: fixed;
+        top: 24px;
+        left: 24px;
+        z-index: 100;
+        background: rgba(17,26,43,0.85);
+        border-radius: 50%;
+        padding: 6px;
+        box-shadow: 0 4px 16px rgba(0,0,0,.18);
+        transition: background .2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+}
+.back-arrow:hover {
+  background: var(--accent);
+}
+.back-arrow svg {
+  display: block;
+}
   </style>
 </head>
 <body>
@@ -177,7 +198,7 @@
 
           <div class="field">
             <label for="email">E-mail institucional</label>
-            <input id="email" name="email" type="email" placeholder="seunome@senai.edu" required />
+            <input id="email" name="email" type="email" placeholder="seunome@aluno.senai.com" required />
           </div>
         </div>
 
@@ -218,6 +239,11 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite">Inscrição enviada com sucesso! ✓</div>
+  <a href="index.html" class="back-arrow" aria-label="Voltar para página inicial" title="Voltar">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M20 8L12 16L20 24" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
 
   <script>
     // Toggle de senha
