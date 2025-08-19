@@ -1,19 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INTERCLASSES - SENAI | Inscrição</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0d12;           /* preto profundo/azul muito escuro */
+      --panel:#0f1420;        /* painel */
+      --muted:#7a8aa0;        
+      --text:#e6ebf2;         
+      --primary:#e53935;      /* vermelho */
+      --primary-700:#b32c29;  
+      --accent:#193b7a;       /* azul escuro */
+      --accent-700:#112a57;
+      --ring: 0 0 0 3px rgba(229,57,53,.25);
+      --radius:16px;
+      --shadow: 0 10px 35px rgba(0,0,0,.45);
+      --input:#12192a;
+      --input-border:#1c2740;
+      --success:#16a34a;
+      --error:#ef4444;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(25,59,122,.15), transparent 60%),
+                  radial-gradient(900px 600px at -10% 110%, rgba(229,57,53,.12), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      display:grid; place-items:center;
+      padding:32px;
+    }
+
+    .wrap{width:100%; max-width: 980px; display:grid; grid-template-columns: 1.1fr .9fr; gap:28px}
+    @media (max-width: 900px){.wrap{grid-template-columns:1fr}}
+
+    .card{
+      background: linear-gradient(180deg, rgba(17,26,43,.7), rgba(15,20,32,.9));
+      border:1px solid var(--input-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .header{
+      padding:28px 28px 0; display:flex; align-items:center; gap:14px;
+    }
+    .badge{ 
+      background: linear-gradient(135deg, var(--primary), var(--primary-700));
+      color:#fff; font-weight:700; letter-spacing:.5px;
+      border-radius:999px; padding:6px 12px; font-size:12px;
+    }
+
+    .title{font-size: clamp(22px, 3.2vw, 34px); font-weight:700; margin: 6px 0 2px}
+    .subtitle{color:var(--muted); font-size:14px; margin:0 0 14px}
+
+    form{
+      padding: 18px 28px 28px; display:grid; gap:16px;
+    }
+
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    @media (max-width: 640px){.grid{grid-template-columns:1fr}}
+
+    label{display:block; font-size:13px; color:var(--muted); margin:0 0 8px}
+
+    .field{position:relative}
+    input, select{
+      width:100%; height:48px; border-radius:12px; outline:0;
+      border:1px solid var(--input-border); background:var(--input); color:var(--text);
+      padding:12px 14px; font-size:15px; transition: border-color .2s ease, box-shadow .2s ease, transform .02s ease;
+    }
+    input::placeholder{color:#9aa8bd}
+
+    input:focus, select:focus{
+      border-color: var(--accent);
+      box-shadow: var(--ring);
+    }
+
+    .password-toggle{
+      position:absolute; top:50%; right:10px; transform:translateY(-50%);
+      background:transparent; border:0; color: #9fb1cf; cursor:pointer; padding:6px 8px; border-radius:10px;
+    }
+    .password-toggle:hover{color:#cfe0ff; background:#142241}
+
+    .actions{display:flex; gap:12px; align-items:center; margin-top:6px}
+
+    .btn{
+      appearance:none; border:0; height:48px; padding:0 18px; border-radius:12px; cursor:pointer; font-weight:600;
+      transition: transform .02s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:active{ transform: translateY(1px) }
+
+    .btn-primary{
+      background: linear-gradient(135deg, var(--primary), var(--primary-700)); color:#fff;
+      box-shadow: 0 8px 20px rgba(229,57,53,.25);
+    }
+    .btn-primary:hover{filter:brightness(1.03)}
+
+    .btn-secondary{
+      background: linear-gradient(135deg, var(--accent), var(--accent-700)); color:#e8eefb;
+      box-shadow: 0 8px 20px rgba(25,59,122,.22);
+    }
+
+    .terms{ display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--muted)}
+    .terms input{ width:18px; height:18px; margin-top:2px }
+
+    .aside{
+      padding: 24px 24px 28px; display:flex; flex-direction:column; gap:18px;
+      background: radial-gradient(600px 340px at 100% 0%, rgba(229,57,53,.12), transparent 60%),
+                  linear-gradient(180deg, rgba(17,26,43,.85), rgba(15,20,32,.95));
+      border:1px solid var(--input-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .aside .logo{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.4px
+    }
+    .dot{width:10px; height:10px; border-radius:50%; background: var(--primary); box-shadow: 0 0 0 6px rgba(229,57,53,.18)}
+
+    .list{margin:0; padding:0; list-style:none; display:grid; gap:10px; color:#b9c7db; font-size:14px}
+    .list li{display:flex; gap:10px; align-items:flex-start}
+    .list .marker{width:8px; height:8px; border-radius:2px; background: var(--accent)}
+
+    .toast{
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #0e171f; border:1px solid #123; color:#d7ffea; padding: 12px 16px; border-radius: 12px; display:none;
+      box-shadow: 0 12px 30px rgba(0,0,0,.4);
+    }
+    .toast.show{display:block}
+
+    .helper{font-size:12px; color:#9fb1cf; margin-top:6px}
+  </style>
 </head>
 <body>
-    <div id="usuarios-form">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+  <div class="wrap">
+    <section class="card">
+      <div class="header">
+        <span class="badge">INTERCLASSES • SENAI</span>
+      </div>
+      <form id="form-inscricao" novalidate>
+        <h1 class="title">Inscreva-se</h1>
+        <p class="subtitle">Preencha seus dados para participar do INTERCLASSES.</p>
 
-        <label for="Modalidade">Modalidade:</label>
-        <select id="modalidade-id" name="modalidade-id" required>
-            <option value="">Carregando modalidades...</option>
-        </select>
-    </div>
+        <div class="grid">
+          <div class="field">
+            <label for="nome">Nome completo</label>
+            <input id="nome" name="nome" type="text" placeholder="Ex.: Ana Silva" minlength="3" required />
+          </div>
+          <div class="field">
+            <label for="nascimento">Data de nascimento</label>
+            <input id="nascimento" name="data_nascimento" type="date" required />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="turma">Turma</label>
+            <input list="turmas" id="turma" name="turma" placeholder="Ex.: 1º DS - A" required />
+            <datalist id="turmas">
+              <option value="CT DEV 1A"></option>
+              <option value="CT DEV 2A"></option>
+              <option value="MECATRÔNICA 2A"></option>
+              <option value="MECATRÔNICA 2B"></option>
+              <option value="Administração"></option>
+              <option value="Eletroeletrônica"></option>
+            </datalist>
+            <p class="helper">Você pode digitar a sua turma se não aparecer na lista.</p>
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail institucional</label>
+            <input id="email" name="email" type="email" placeholder="seunome@senai.edu" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input id="senha" name="senha" type="password" minlength="6" placeholder="Crie uma senha" required />
+          <button class="password-toggle" type="button" aria-label="Mostrar/ocultar senha" title="Mostrar/ocultar senha" onclick="togglePassword()">👁️</button>
+        </div>
+
+        <label class="terms">
+          <input type="checkbox" id="aceite" required />
+          <span>Confirmo que li e aceito o regulamento do INTERCLASSES.</span>
+        </label>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Enviar inscrição</button>
+          <button class="btn btn-secondary" type="reset">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="aside">
+      <div class="logo"><span class="dot"></span> SENAI • INTERCLASSES</div>
+      <div>
+        <h2 style="margin:.2rem 0 0;font-size:18px">Regras rápidas</h2>
+        <ul class="list">
+          <li><span class="marker"></span>Inscrições individuais, 1 por estudante.</li>
+          <li><span class="marker"></span>Use seu e-mail institucional para validar a participação.</li>
+          <li><span class="marker"></span>Não associados tem custo de 25 reais por modalidade a cobrir.</li>
+          <li><span class="marker"></span>Dados tratados conforme a LGPD.</li>
+        </ul>
+      </div>
+      <div>
+        <h2 style="margin:.2rem 0 0;font-size:18px">Dúvidas?</h2>
+        <p style="margin:.3rem 0 0; color:#a9bad1">Procure a coordenação ou envie e-mail para <strong>biblioteca402@sp.senai.br</strong>.</p>
+      </div>
+    </aside>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Inscrição enviada com sucesso! ✓</div>
+
+  <script>
+    // Toggle de senha
+    function togglePassword(){
+      const input = document.getElementById('senha');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    // Validação e envio (demo)
+    const form = document.getElementById('form-inscricao');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+
+      // Exemplo de payload (pronto para integrar com backend)
+      const data = Object.fromEntries(new FormData(form).entries());
+      console.log('Payload de inscrição:', data);
+
+      // Fake success toast
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+
+      // Resetar o formulário após enviar
+      form.reset();
+    });
+
+    // Acessibilidade: foco visível ao usar teclado
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Tab') document.body.classList.add('outline');
+    });
+  </script>
 </body>
 </html>
